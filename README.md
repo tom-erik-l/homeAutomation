@@ -10,8 +10,9 @@
 >Git clone your repository with your playbooks into Ubuntu
 >Update your repo permissions ( chmod 755 )
 >From here you can run your Ansible playbooks !
-
+>
 >**Bonus!**
+>
 >Install VS Code
 >Change your default terminal to WSL
 >Run your playbooks from your Windows VS Code directly! This means you can write your playbooks / YAML / Jinja and run your playbooks from the editor directly !
