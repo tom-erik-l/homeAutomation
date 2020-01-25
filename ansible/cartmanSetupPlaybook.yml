@@ -1,0 +1,22 @@
+- hosts: cartman
+  remote_user: tom-erik
+
+  tasks: 
+
+
+
+
+# https://stackoverflow.com/questions/28119521/ansible-include-task-only-if-file-exists
+#  - name: Set authorized key taken from file
+#    #Ensure that id_rsa.pub ssh file is available on control node first (may need to copy from Win10)
+    # stat: 
+    #   path: '/home/tom-erik/.ssh/id_rsa.pub'
+    # register: file 
+
+
+    # authorized_key:
+    #   user: tom-erik
+    #   state: present
+    #   key: "{{ lookup('file', '/home/tom-erik/.ssh/id_rsa.pub') }}"
+    # when: 
+

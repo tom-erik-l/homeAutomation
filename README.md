@@ -1,5 +1,7 @@
 # homeAutomation
 #
+### 
+
 ### Transfer Windows 10 SSH keys into Ubuntu 
 From https://peteoshea.co.uk/setup-git-in-wsl/:
 >If you have an SSH key already setup on Windows you could reuse it rather than creating a new one. (Note that PuTTY keys do not work here). To do this you can just copy the key from the Windows filesystem into the WSL’s filesystem. Linux has some rules about how visible the key is. So you need to make sure the access levels are strict enough to meet these requirements:
