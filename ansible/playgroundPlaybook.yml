@@ -1,0 +1,5 @@
+- hosts: cartman
+  #remote_user: tom-erik
+  tasks:
+  - name: test connection 
+    ping:

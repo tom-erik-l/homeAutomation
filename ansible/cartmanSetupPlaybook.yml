@@ -1,9 +1,5 @@
 - hosts: cartman
-  remote_user: tom-erik
-
-  tasks: 
-
-
+  #remote_user: tom-erik
 
 
 # https://stackoverflow.com/questions/28119521/ansible-include-task-only-if-file-exists
