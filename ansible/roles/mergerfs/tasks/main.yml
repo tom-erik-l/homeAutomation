@@ -1,0 +1,28 @@
+#Create mount points
+#Alternatively, do it manually using: sudo mkdir /path/to/mountpoint
+- name: create /mnt points
+  file: 
+    path: "/mnt/{{item}}"
+    state: directory
+    owner: nobody
+    group: nobody
+    mode: 0777
+    access_time: preserve
+    modification_time: now
+  with_items: "{{mntpoints}}"
+  
+#Mount the disks
+- name: mount disks
+  mount:
+    path: "/mnt/{{item.name}}"
+    src: UUID="{{item.src}}"
+    fstype: "{{item.type}}"
+    state: mounted
+  with_items:
+    #- { name: parity1, src: /dev/disk/by-id/ata-Hitachi_HDS5C3030ALA630_MJ1311YNG4GE8A-part1}
+    - { name: disk1, type: ext4, src: 37795d34-dd06-4592-9826-005de3ad2a45}
+    - { name: disk2, type: ext4, src: b9827244-f281-4efc-baba-70d50b8231bf}
+    #- { name: disk3, type: ntfs, src: /dev/disk/by-id/ata-TOSHIBA_DT01ACA300_X3544DGKS-part1}
+
+#Create and mount the mergerfs file system
+
