@@ -3,13 +3,8 @@
   - name: test connection with -m ping
     ping: 
 
-  - name: SSH set up - set authorized key from file
-    # https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html#
-    authorized_key:
-        user: tom-erik
-        state: present
-        key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa.pub') }}"
-
-
+  - include_role:
+    name: ansibleSetup
+    
   - include_role:
     name: mergerfs

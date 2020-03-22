@@ -7,9 +7,9 @@
     owner: nobody
     group: nobody
     mode: 0777
-    access_time: preserve
-    modification_time: now
-  with_items: "{{mntpoints}}"
+    #access_time: preserve
+    #modification_time: now
+  with_items: "{{mntpoints.name}}"
   
 #Mount the disks
 - name: mount disks
@@ -18,11 +18,7 @@
     src: UUID="{{item.src}}"
     fstype: "{{item.type}}"
     state: mounted
-  with_items:
-    #- { name: parity1, src: /dev/disk/by-id/ata-Hitachi_HDS5C3030ALA630_MJ1311YNG4GE8A-part1}
-    - { name: disk1, type: ext4, src: 37795d34-dd06-4592-9826-005de3ad2a45}
-    - { name: disk2, type: ext4, src: b9827244-f281-4efc-baba-70d50b8231bf}
-    #- { name: disk3, type: ntfs, src: /dev/disk/by-id/ata-TOSHIBA_DT01ACA300_X3544DGKS-part1}
-
+  with_items: "{{mntpoints}}"
+    
 #Create and mount the mergerfs file system
 

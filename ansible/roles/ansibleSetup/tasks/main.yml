@@ -1,0 +1,42 @@
+become: true
+
+tasks:
+
+    #Sudo Group Setup
+    #From: https://github.com/do-community/ansible-playbooks/blob/master/setup_ubuntu1804/playbook.yml#L14
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: 
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+
+    # User + Key Setup
+    - name: Create a new regular user with sudo privileges
+      user:
+        name: "{{ create_user }}"
+        state: present
+        groups: wheel
+        append: true
+        create_home: true
+        shell: /bin/bash
+
+        
+  - name: SSH set up - set authorized key from file
+    # https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html#
+    authorized_key:
+        user: tom-erik
+        state: present
+        key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa.pub') }}"
+
+
+
+
+        copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+sys_packages: [ 'curl', 'vim', 'git', 'ufw']
