@@ -1,10 +1,39 @@
+#Run the playbook by:
+#ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml 
 - hosts: cartman 
   tasks:
   - name: test connection with -m ping
     ping: 
 
-  - include_role:
-    name: ansibleSetup
-    
-  - include_role:
-    name: mergerfs
+  - name: SSH set up - set authorized key from file
+    # https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html#
+    authorized_key:
+        user: tom-erik
+        state: present
+        key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_personal.pub') }}"
+
+  
+
+  #- include_role:
+  #  name: mergerfs
+
+
+
+  # - name: Allow 'localAdmin' group to have passwordless restart / shutdown
+  #   shell: id tom-erik med noget regexp 
+  #   register:
+  #   lineinfile:
+  #     path: /etc/sudoers
+  #     state: present
+  #     regexp: '^%wheel'
+  #     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+  #     validate: '/usr/sbin/visudo -cf %s'
+  #   when: 
+
+  - name: Allow user 'tom-erik' to have passwordless restart / shutdown
+    lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: '^%tom-erik'
+      line: '%tom-erik ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'
+      validate: '/usr/sbin/visudo -cf %s'
