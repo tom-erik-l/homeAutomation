@@ -1,23 +1,16 @@
 #Run the playbook by:
 #ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml 
 - hosts: cartman 
+  #remote_user: tom-erikAnsibleAdmin
+
   tasks:
   - name: test connection with -m ping
     ping: 
 
-  - name: SSH set up - set authorized key from file
-    # https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html#
-    authorized_key:
-        user: tom-erik
-        state: present
-        key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_personal.pub') }}"
-
-  
-
-  #- include_role:
-  #  name: mergerfs
-
-
+  # - name: who am I?
+  #   command: whoami
+  #   register: out
+  # - debug: var=out.stdout_lines
 
   # - name: Allow 'localAdmin' group to have passwordless restart / shutdown
   #   shell: id tom-erik med noget regexp 
@@ -37,3 +30,19 @@
       regexp: '^%tom-erik'
       line: '%tom-erik ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'
       validate: '/usr/sbin/visudo -cf %s'
+    become: true
+
+  - name: Install applications
+    apt:
+      name: "{{item}}"
+      state: present
+      update_cache: yes
+    with_items: 
+      - smartmontools
+    become: true
+
+
+      
+     
+  # - include_role:
+  #     name: mergerfs
