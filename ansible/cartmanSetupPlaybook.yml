@@ -7,30 +7,10 @@
   - name: test connection with -m ping
     ping: 
 
-  # - name: who am I?
-  #   command: whoami
-  #   register: out
-  # - debug: var=out.stdout_lines
-
-  # - name: Allow 'localAdmin' group to have passwordless restart / shutdown
-  #   shell: id tom-erik med noget regexp 
-  #   register:
-  #   lineinfile:
-  #     path: /etc/sudoers
-  #     state: present
-  #     regexp: '^%wheel'
-  #     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-  #     validate: '/usr/sbin/visudo -cf %s'
-  #   when: 
-
-  - name: Allow user 'tom-erik' to have passwordless restart / shutdown
-    lineinfile:
-      path: /etc/sudoers
-      state: present
-      regexp: '^%tom-erik'
-      line: '%tom-erik ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'
-      validate: '/usr/sbin/visudo -cf %s'
-    become: true
+  - name: who am I?
+    command: whoami
+    register: out
+  - debug: var=out.stdout_lines
 
   - name: Install applications
     apt:
