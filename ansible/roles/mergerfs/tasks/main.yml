@@ -2,15 +2,13 @@
 #Alternatively, do it manually using: sudo mkdir /path/to/mountpoint
 - name: create /mnt points
   file: 
-    path: "/mnt/{{item}}"
+    path: "/mnt/{{item.name}}"
     state: directory
-    owner: nobody
-    group: nobody
     mode: 0777
-    #access_time: preserve
-    #modification_time: now
-  with_items: "{{mntpoints.name}}"
+  with_items: "{{mntpoints}}"
+  become: true
   
+
 #Mount the disks
 - name: mount disks
   mount:
@@ -19,6 +17,21 @@
     fstype: "{{item.type}}"
     state: mounted
   with_items: "{{mntpoints}}"
+  become: true
     
 #Create and mount the mergerfs file system
 
+
+
+#   - { name: disk1, type: ext4, src: 37795d34-dd06-4592-9826-005de3ad2a45}
+#   - { name: disk2, type: ext4, src: b9827244-f281-4efc-baba-70d50b8231bf}
+
+
+# - name: mount mergerfs array
+#   mount:
+#     name: /mnt/storage
+#     src: /mnt/disk*
+#     opts: direct_io,defaults,allow_other,minfreespace=20G,fsname=mergerfs
+#     fstype: fuse.mergerfs
+#     # change to 'mounted' to auto mount
+#     state: present
