@@ -3,4 +3,4 @@ createUser:
 
 groupPermissions:
 - {group: localAdmin, permission: '%localAdmin ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'}
-# - {group: wheel, permission: '%wheel ALL=(ALL) NOPASSWD:ALL'}
+- {group: wheel, permission: '%wheel ALL=(ALL) NOPASSWD:ALL'}
