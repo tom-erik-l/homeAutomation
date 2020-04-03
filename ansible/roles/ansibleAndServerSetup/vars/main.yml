@@ -1,2 +1,6 @@
 createUser:
 - {name: tom-erikAnsibleAdmin, group: wheel, copy_local_key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome.pub') }}"}
+
+groupPermissions:
+- {group: localAdmin, permission: '%localAdmin ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'}
+# - {group: wheel, permission: '%wheel ALL=(ALL) NOPASSWD:ALL'}

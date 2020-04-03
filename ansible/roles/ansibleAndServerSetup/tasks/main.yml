@@ -5,15 +5,38 @@
       name: "{{item.group}}"
       state: present
     with_items: "{{createUser}}"
-  
-  - name: Allow 'wheel' group to have passwordless sudo
-    lineinfile:
-      path: /etc/sudoers
-      state: present
-      regexp: '^%wheel'
-      line: '%wheel ALL=(ALL) NOPASSWD:ALL'
-      validate: '/usr/sbin/visudo -cf %s'
-    become: true
+
+  # - name: debug group permissions
+  - debug: 
+      msg: item group is = "{{item.group}}"
+    with_items: "{{groupPermissions}}"   
+
+  #TASK [ansibleAndServerSetup : debug] *************************************************************************************************************************************************************************************ok: [cartman] => (item=None) => {
+ #   "msg": "item group is = \"localAdmin\""
+#}
+# the output of this is kinda funny with the forward slashes, which is probably why the regular expression is not working so well...
+
+
+  # - name: Set group permissions
+  #   lineinfile:
+  #     path: /etc/sudoers
+  #     state: present
+  #     regexp: '^%"{{item.group}}"'
+  #     line: "{{item.permission}}"
+  #     validate: '/usr/sbin/visudo -cf %s'
+  #   become: true
+  #   with_items: "{{groupPermissions}}"
+  # - debug:
+  #   msg: the group is ="{{item.group}}"
+
+  # - name: Allow 'localAdmin' group to have passwordless restart / shutdown
+  #   lineinfile:
+  #     path: /etc/sudoers
+  #     state: present
+  #     regexp: '^%localAdmin'
+  #     line: '%localAdmin ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'
+  #     validate: '/usr/sbin/visudo -cf %s'
+  #   become: true 
 
   # User + Key Setup
   #From: https://github.com/do-community/ansible-playbooks/blob/master/setup_ubuntu1804/playbook.yml#L14
@@ -21,12 +44,12 @@
     user:
       name: "{{ item.name }}"
       state: present
-      groups: wheel
+      groups: "{{ item.group }}"
       append: true
       create_home: true
       shell: /bin/bash
     with_items: "{{createUser}}"
-    when: item.group == "wheel"
+    # when: item.group == "wheel"
     become: true
 
   - name: Set authorized key for remote user
