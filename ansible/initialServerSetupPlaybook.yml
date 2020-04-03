@@ -4,16 +4,15 @@
 #Will cause error according to: https://stackoverflow.com/questions/40983674/ansible-non-root-sudo-user-and-become-privilege-escalation
 
 - hosts: cartman 
-  #remote_user: tom-erikAnsibleAdmin
 
   tasks:
   - name: test connection with -m ping
     ping: 
 
-  # - name: who am I?
-  #   command: whoami
-  #   register: out
-  # - debug: var=out.stdout_lines
+  - name: who am I?
+    command: whoami
+    register: out
+  - debug: var=out.stdout_lines
 
   - include_role:
       name: ansibleAndServerSetup
