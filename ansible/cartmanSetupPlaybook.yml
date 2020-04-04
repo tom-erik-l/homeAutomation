@@ -13,11 +13,9 @@
 
   - name: Install applications
     apt:
-      name: "{{item}}"
+      pkg:
+        - smartmontools
       state: present
-      update_cache: yes
-    with_items: 
-      - smartmontools
     become: true    
      
   - include_role:
