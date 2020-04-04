@@ -1,7 +1,6 @@
 #Run the playbook by:
 #ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml 
-- hosts: cartman 
-  #remote_user: tom-erikAnsibleAdmin
+- hosts: cartmanAnsibleAdmin 
 
   tasks:
   - name: test connection with -m ping
@@ -19,10 +18,7 @@
       update_cache: yes
     with_items: 
       - smartmontools
-    become: true
-
-
-      
+    become: true    
      
-  # - include_role:
-  #     name: mergerfs
+  - include_role:
+      name: mergerfs
