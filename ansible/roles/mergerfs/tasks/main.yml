@@ -14,6 +14,7 @@
 #   with_items: "{{mntpoints}}"  
 
 #Mount the disks
+#The mount  module always reports changed for some stupid reason.
 - name: mount disks
   mount:
     path: /mnt/{{item.name}}
@@ -26,18 +27,11 @@
   become: true
     
 #Create and mount the mergerfs file system
-
-
-
-#   - { name: disk1, type: ext4, src: 37795d34-dd06-4592-9826-005de3ad2a45}
-#   - { name: disk2, type: ext4, src: b9827244-f281-4efc-baba-70d50b8231bf}
-
-
-# - name: mount mergerfs array
-#   mount:
-#     name: /mnt/storage
-#     src: /mnt/disk*
-#     opts: direct_io,defaults,allow_other,minfreespace=20G,fsname=mergerfs
-#     fstype: fuse.mergerfs
-#     # change to 'mounted' to auto mount
-#     state: present
+- name: mount mergerfs array
+  mount:
+    name: /mnt/storage
+    src: /mnt/disk*
+    opts: direct_io,defaults,allow_other,minfreespace=20G,fsname=mergerfs
+    fstype: fuse.mergerfs
+    # change to 'mounted' to auto mount
+    state: present
