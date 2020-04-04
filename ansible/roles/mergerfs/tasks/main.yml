@@ -8,14 +8,14 @@
   with_items: "{{mntpoints}}"
   become: true
   
-
 #Mount the disks
 - name: mount disks
   mount:
     path: "/mnt/{{item.name}}"
-    src: UUID="{{item.src}}"
+    src: UUID={{item.UUID}}
     fstype: "{{item.type}}"
-    state: mounted
+    state: remounted
+    boot: yes
   with_items: "{{mntpoints}}"
   become: true
     

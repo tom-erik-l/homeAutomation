@@ -1,5 +1,6 @@
+# Verify that the dev: and UUID: matches !!!
 mntpoints:
   #- { name: parity1, src: /dev/disk/by-id/ata-Hitachi_HDS5C3030ALA630_MJ1311YNG4GE8A-part1}
-  - { name: disk1, type: ext4, src: 37795d34-dd06-4592-9826-005de3ad2a45}
-  - { name: disk2, type: ext4, src: b9827244-f281-4efc-baba-70d50b8231bf}
+  - { name: disk1, dev: /dev/sda1 , type: ext4, UUID: 4a08613a-b80f-43cb-89d2-b6dd98a898b9}
+  - { name: disk2, dev: /dev/sdb1, type: ext4, UUID: fbf97428-75bf-4571-b98d-f2d15fb34b3f}
   #- { name: disk3, type: ntfs, src: /dev/disk/by-id/ata-TOSHIBA_DT01ACA300_X3544DGKS-part1}
