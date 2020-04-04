@@ -2,20 +2,26 @@
 #Alternatively, do it manually using: sudo mkdir /path/to/mountpoint
 - name: create /mnt points
   file: 
-    path: "/mnt/{{item.name}}"
+    path: /mnt/{{item.name}}
     state: directory
     mode: 0777
   with_items: "{{mntpoints}}"
   become: true
   
+# - name: debug mount points
+#   debug: 
+#     msg: mountpoint is = /mnt/{{item.name}}
+#   with_items: "{{mntpoints}}"  
+
 #Mount the disks
 - name: mount disks
   mount:
-    path: "/mnt/{{item.name}}"
+    path: /mnt/{{item.name}}
     src: UUID={{item.UUID}}
     fstype: "{{item.type}}"
-    state: remounted
-    boot: yes
+    # Need ansible 2.9 for remounted option, see: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+    state: mounted
+    opts: nodev,nosuid,noexec,noatime,nodiratime
   with_items: "{{mntpoints}}"
   become: true
     
