@@ -16,3 +16,13 @@
 
   - include_role:
       name: ansibleAndServerSetup
+
+  # - name: create filesystems on disks without
+  #   filesystem:
+  #     force: no 
+  #     fstype: ext4
+  #     dev: "{{item}}"
+  #   loop: 
+  #     - /dev/sda1
+  #     - /dev/sdb1
+  #   become: true
