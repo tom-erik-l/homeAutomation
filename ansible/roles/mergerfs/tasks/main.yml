@@ -15,23 +15,30 @@
 
 #Mount the disks
 #The mount  module always reports changed for some stupid reason.
-- name: mount disks
+- name: add fstab entry for disks
   mount:
     path: /mnt/{{item.name}}
     src: UUID={{item.UUID}}
     fstype: "{{item.type}}"
     # Need ansible 2.9 for remounted option, see: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
-    state: mounted
+    state: present
     opts: nodev,nosuid,noexec,noatime,nodiratime
   with_items: "{{mntpoints}}"
   become: true
     
 #Create and mount the mergerfs file system
-- name: mount mergerfs array
+- name: add fstab entry for mergerfs array
   mount:
     name: /mnt/storage
     src: /mnt/disk*
-    opts: direct_io,defaults,allow_other,minfreespace=20G,fsname=mergerfs
+    opts: defaults,allow_other,direct_io,use_ino,hard_remove,dropcacheonclose=true,fsname=mergerfs
     fstype: fuse.mergerfs
-    # change to 'mounted' to auto mount
-    state: present
+    state: present 
+  become: true
+
+- name: reload fstab
+  # Needed to add this for mounts to appear properly, without rebooting
+  # https://unix.stackexchange.com/questions/477794/how-to-force-os-reload-of-fstab
+  systemd: 
+    daemon_reload: yes
+  become: true
