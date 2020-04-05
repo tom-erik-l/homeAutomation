@@ -2,5 +2,12 @@ createUser:
 - {name: tom-erikAnsibleAdmin, group: wheel, copy_local_key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome.pub') }}"}
 
 groupPermissions:
+#Could maybe try to remove duplicate of groupname in group and permission keys
+#see: 
+#https://docs.ansible.com/ansible/latest/user_guide/playbooks_advanced_syntax.html
+#https://stackoverflow.com/questions/55518577/using-yaml-anchors-in-ansible-role-tasks-file
+#https://stackoverflow.com/questions/34512014/ansible-yaml-dictionary-reference-to-sibling-elements
+#https://stackoverflow.com/questions/56115535/ansible-using-node-anchors-and-merge-keys-split-over-different-yaml-files
+#https://docs.ansible.com/ansible/latest/plugins/lookup/dict.html
 - {group: localAdmin, permission: '%localAdmin ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown'}
 - {group: wheel, permission: '%wheel ALL=(ALL) NOPASSWD:ALL'}
