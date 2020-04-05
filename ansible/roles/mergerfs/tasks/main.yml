@@ -25,6 +25,13 @@
     opts: nodev,nosuid,noexec,noatime,nodiratime
   with_items: "{{mntpoints}}"
   become: true
+
+- name: Install mergerfs package
+  apt:
+    pkg:
+      - mergerfs
+    state: present
+  become: true     
     
 #Create and mount the mergerfs file system
 - name: add fstab entry for mergerfs array
