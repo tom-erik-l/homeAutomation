@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build cartmanSetupPlaybook",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [
+                        "-c"
+                    ]
+                }
+            },
+            "command": ["ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml'" ],
+            // "command": ["dir ansible/"],
+            // "command": "cd '${workspaceFolder}\\cartmanSetupPlaybook.yml'" 
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                // "panel": "new"
+            }
+        }
+    ]
+}
+
+
