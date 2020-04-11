@@ -25,6 +25,23 @@
                 "reveal": "always",
                 // "panel": "new"
             }
+        },
+
+        {
+            "label": "Build initialServerSetupPlaybook",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [
+                        "-c"
+                    ]
+                }
+            },
+            "command": ["ansible-playbook 'ansible/initialServerSetupPlaybook.yml' -i 'ansible/hosts.yml'" ],
+            "presentation": {
+                "reveal": "always"
+            }
         }
     ]
 }
