@@ -29,3 +29,6 @@
   - include_role: 
       name: samba
 
+  - include_role: 
+      name: docker
+

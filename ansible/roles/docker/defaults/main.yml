@@ -1,0 +1,28 @@
+# Based on: https://github.com/IronicBadger/ansible/blob/master/roles/docker/defaults/main.yml
+
+apt_key:
+    # apt repository key
+    url: https://apt.dockerproject.org/gpg
+    # apt repository key signature
+    sig: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    # Line to be added to sources docker.list (release specific)
+    repository: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+  
+    
+    # deb https://apt.dockerproject.org/repo debian-{{ ansible_distribution_release }} main
+
+# The following help expose a docker port or to add additional options when
+# running docker daemon.  The default is to not use any special options.
+# docker_opts: >
+#  -H unix://
+#  -H tcp://0.0.0.0:2375
+#  --log-level=debug
+docker_opts: ""
+
+# List of users to be added to 'docker' system group (disabled by default)
+# SECURITY WARNING:
+# Be aware that granted users can easily get full root access on the docker host system!
+docker_group_members: []
+
+# Set to 'yes' or 'true' to enable updates (sets 'latest' in apt module)
+update_docker_package: yes
