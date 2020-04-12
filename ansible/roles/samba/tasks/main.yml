@@ -9,10 +9,34 @@
     - start samba service
 
 - name: install samba config
-  copy:
-    src: etc/samba/smb.conf
-    dest: /etc/samba/smb.conf
-    owner: root
-    group: root
+  blockinfile:
+    path: /etc/samba/smb.conf
+    marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+    block: |
+      [storage]
+        comment = storage@cartman
+        path = /mnt/storage
+        read only = no
+        browsable = yes
+        create mask = 0644
+        directory mask = 0755
+    validate: 'testparm -s %s'
+  become: true
   notify:
-    - restart samba service
+    - restart nmbd
+    - restart samba-ad-dc
+    - restart smbd
+
+- name: remove map to bad user
+  lineinfile:
+    path: /etc/samba/smb.conf
+    regexp: "^$map to guest*"
+    line: ';\1'
+    backrefs: yes
+  become: true
+
+- name: allow samba in UFW firewall
+  ufw:
+    rule: allow
+    name: Samba
+  become: true

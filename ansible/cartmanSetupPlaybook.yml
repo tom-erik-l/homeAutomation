@@ -20,3 +20,12 @@
      
   - include_role:
       name: mergerfs
+
+  # - name: populate service facts
+  #   service_facts:
+  # - debug:
+  #     var: ansible_facts.services
+
+  - include_role: 
+      name: samba
+
