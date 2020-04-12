@@ -25,4 +25,5 @@
   #   loop: 
   #     - /dev/sda1
   #     - /dev/sdb1
+  #     - /dev/sdd1
   #   become: true
