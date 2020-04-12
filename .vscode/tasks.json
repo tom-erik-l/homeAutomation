@@ -14,19 +14,17 @@
                     ]
                 }
             },
-            "command": ["ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml'" ],
-            // "command": ["dir ansible/"],
-            // "command": "cd '${workspaceFolder}\\cartmanSetupPlaybook.yml'" 
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml'"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "presentation": {
                 "reveal": "always"
-                // "panel": "new"
             }
         },
-
         {
             "label": "Build initialServerSetupPlaybook",
             "type": "shell",
@@ -38,7 +36,9 @@
                     ]
                 }
             },
-            "command": ["ansible-playbook 'ansible/initialServerSetupPlaybook.yml' -i 'ansible/hosts.yml'" ],
+            "command": [
+                "ansible-playbook 'ansible/initialServerSetupPlaybook.yml' -i 'ansible/hosts.yml'"
+            ],
             "presentation": {
                 "reveal": "always"
             }
