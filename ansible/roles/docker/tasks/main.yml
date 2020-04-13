@@ -16,7 +16,7 @@
 
 - name: add docker repository key
   apt_key:
-    id: "{{ apt_key.key }}"
+    id: "{{ apt_key.sig }}"
     url: "{{ apt_key.url }}"
     state: present
   become: true
@@ -37,6 +37,7 @@
       - docker-ce-cli
       - containerd.io
     state: present
+    update_cache: yes   
   become: true  
 #   notify:
 #     - systemd daemon-reload
