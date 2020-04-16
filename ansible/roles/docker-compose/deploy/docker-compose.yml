@@ -1,0 +1,18 @@
+version: "3.0"
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - VERSION=docker
+      # - UMASK_SET=022 #optional
+      # - PLEX_CLAIM= #optional
+    volumes:
+      - /opt/appdata/plex:/config
+      - /mnt/storage/TV Shows:/tv
+      - /mnt/storage/Movies:/movies
+      - /mnt/storage/Music:/Music
+    restart: unless-stopped

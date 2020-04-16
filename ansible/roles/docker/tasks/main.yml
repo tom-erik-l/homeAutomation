@@ -10,6 +10,7 @@
       - curl 
       - gnupg-agent 
       - software-properties-common
+      - python-pip
     state: present
     update_cache: yes
   become: true  
@@ -21,7 +22,6 @@
     state: present
   become: true
 #   register: add_repository_key
-
 
 - name: add docker repository and update apt cache
   apt_repository:
@@ -43,3 +43,47 @@
     - systemd daemon-reload
     - restart docker service
     - start docker service
+
+- name: install docker python tools
+  pip: 
+    name:
+    - docker
+    - jsondiff
+    - pyyaml
+  become: true
+  notify:
+  - systemd daemon-reload
+  - restart docker service
+  - start docker service
+
+- name: create group for docker appdata
+  group:
+    name: "{{dockergroup}}"
+    state: present
+    gid: 1050
+  become: true
+
+- name: create user for docker appdata
+  user:
+    name: "{{dockeruser}}"
+    shell: /sbin/nologin
+    uid: 1050
+    group: "{{dockergroup}}"
+  become: true
+
+- name: create docker appdata base directory
+  file:
+    dest: "{{ appdata }}"
+    state: directory
+    owner: "{{dockeruser}}"
+    group: "{{dockergroup}}"
+  become: true
+
+- name: set docker PUID and PGID environment variables for docker stack
+  blockinfile:
+    path: /etc/environment
+    marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+    block: |
+      PUID=1050
+      PGID=1050
+  become: true  
