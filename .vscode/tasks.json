@@ -15,7 +15,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml'"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='docker'"
             ],
             "group": {
                 "kind": "build",
@@ -23,7 +23,8 @@
             },
             "presentation": {
                 "reveal": "always"
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Build initialServerSetupPlaybook",
