@@ -28,6 +28,8 @@
   ignore_errors: yes
   register: out
 - debug: var=out
+- debug: 
+    msg: "{{myStack}}_plex"
 
 #Run to check which containers are running
 # sudo docker node ps $(docker node ls -q)
