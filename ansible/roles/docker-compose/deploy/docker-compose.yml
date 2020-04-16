@@ -1,9 +1,8 @@
-version: "3.0"
+version: "3.7"
 services:
   plex:
     image: linuxserver/plex
-    container_name: plex
-    network_mode: host
+    # container_name: plex
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -15,4 +14,15 @@ services:
       - /mnt/storage/TV Shows:/tv
       - /mnt/storage/Movies:/movies
       - /mnt/storage/Music:/Music
-    restart: unless-stopped
+    # restart_policy:
+    #   condition: on-failure
+    #   delay: 5s
+    #   max_attempts: 10
+    #   window: 120s
+#     networks:
+#       - hostnet
+
+# networks:
+#   hostnet:
+#     external:
+#       name: host

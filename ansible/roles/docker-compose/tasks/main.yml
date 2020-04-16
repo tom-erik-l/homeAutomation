@@ -15,15 +15,23 @@
 - name: deploy stack from a compose file
   docker_stack:
     state: present
-    name: plexStack
+    name: "{{myStack}}"
     prune: yes
     compose:
       - "/opt/docker-compose.yml"
   become: true
-  
-#   register: out
-# - debug: var=out
+
+- name: modify network to host networking
+  docker_swarm_service:
+    name: "{{myStack}}_plex"
+    networks: host
+  ignore_errors: yes
+  register: out
+- debug: var=out
 
 #Run to check which containers are running
 # sudo docker node ps $(docker node ls -q)
 # sudo docker node ps cartman
+
+#To get long error messages:
+# sudo docker service ps plexStack_plex --no-trunc
