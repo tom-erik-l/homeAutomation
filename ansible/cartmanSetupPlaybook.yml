@@ -15,6 +15,9 @@
     apt:
       pkg:
         - smartmontools
+        - curl
+        - python
+        - git
       state: present
     become: true    
 
@@ -27,4 +30,4 @@
     - {role: mergerfs}
     - {role: samba}
     - {role: docker, tags: docker}
-    - {role: docker-compose, tags: docker-compose}
+    - {role: docker_container, tags: docker_container}

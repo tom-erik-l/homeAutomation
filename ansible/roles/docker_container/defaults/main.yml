@@ -1,0 +1,1 @@
+CURL_OPTS: "--connect-timeout 15 --silent --show-error --fail"
