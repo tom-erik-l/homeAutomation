@@ -1,16 +1,10 @@
-- name: docker swarm leave
-  docker_swarm:
-    state: absent
-    force: yes
-  become: true
-
 - name: plex container
   docker_container:
     name: plex
     image: linuxserver/plex
     env:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
       VERSION: "docker"
     volumes:
       - /opt/appdata/plex:/config
@@ -22,8 +16,9 @@
     restart: yes
     state: started
     restart_policy: unless-stopped 
-    healthcheck:
-      test: curl ${CURL_OPTS} "http://${TARGET}:32400/identity" >/dev/null  
+    # Doesn't work for some reason
+    # healthcheck:
+      # test: "CMD curl ${CURL_OPTS} 'http://localhost:32400/identity' >/dev/null"
   become: true
 
 - name: allow plex in UFW firewall
@@ -31,4 +26,25 @@
     rule: allow
     proto: tcp
     port: "32400"
+  become: true
+
+- name: portainer container
+  docker_container: 
+    name: portainer
+    image: portainer/portainer
+    volumes:
+    - /opt/appdata/portainer:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: host
+    pull: yes
+    restart: yes
+    state: started
+    restart_policy: always
+  become: true
+
+- name: allow portainer in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "9000"
   become: true

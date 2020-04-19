@@ -26,3 +26,7 @@ docker_group_members: []
 
 # Set to 'yes' or 'true' to enable updates (sets 'latest' in apt module)
 update_docker_package: yes
+
+# User and group stuff for docker 
+PUID: 1050
+PGID: 1050
