@@ -20,7 +20,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Build initialServerSetupPlaybook",
@@ -38,7 +39,9 @@
             ],
             "presentation": {
                 "reveal": "always"
-            }
+            },
+            "problemMatcher": [],
+            "group": "build"
         }
     ]
 }
