@@ -80,6 +80,7 @@
   with_items:
     - plex
     - portainer
+    - transmission
   become: true
 
 - name: set docker PUID and PGID environment variables for docker stack

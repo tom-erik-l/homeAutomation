@@ -3,19 +3,16 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Build cartmanSetupPlaybook",
+        {   "label": "Build cartmanSetupPlaybook",
             "type": "shell",
             "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [
-                        "-c"
-                    ]
+                    "args": [ "-c" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='docker_container'"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='docker_container' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
             ],
             "group": {
                 "kind": "build",
@@ -29,9 +26,7 @@
             "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [
-                        "-c"
-                    ]
+                    "args": [ "-c" ]
                 }
             },
             "command": [
