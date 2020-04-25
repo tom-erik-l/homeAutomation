@@ -1,6 +1,15 @@
 #Run the playbook by:
 #ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml 
 - hosts: cartmanAnsibleAdmin 
+  vars:
+    restart_containers: false
+    containers: # Docker containers
+    - plex
+    - portainer
+    - transmission
+    - pi_hole
+    PUID: "1050" # User and group for docker 
+    PGID: "1050"
 
   tasks:
   - name: test connection with -m ping
@@ -25,9 +34,6 @@
   #   service_facts:
   # - debug:
   #     var: ansible_facts.services
-
-  vars:
-    restart_containers: true
 
   roles:
     - {role: mergerfs, tags: mergerfs}

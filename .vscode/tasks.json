@@ -60,7 +60,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='portainer' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='portainer'"
             ],
             "group": "build",
             "problemMatcher": []
@@ -75,7 +75,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='plex' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='plex'"
             ],
             "group": "build",
             "problemMatcher": []
@@ -90,7 +90,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pi_hole' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pi_hole'"
             ],
             "group": "build",
             "problemMatcher": []

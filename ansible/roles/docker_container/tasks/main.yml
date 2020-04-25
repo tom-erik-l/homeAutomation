@@ -1,27 +1,7 @@
 - include_tasks: 
-    file: plex.yml
+    file: "{{ item }}.yml"
     apply: 
       tags:
-        plex
-  tags: always 
-
-- include_tasks: 
-    file: portainer.yml
-    apply: 
-      tags:
-        portainer
-  tags: always  
-
-- include_tasks: 
-    file: transmission.yml
-    apply: 
-      tags:
-        transmission
-  tags: always  
-
-- include_tasks: 
-    file: pi_hole.yml
-    apply: 
-      tags:
-        pi_hole
-  tags: always  
+        "{{ item }}"
+  tags: always
+  with_items: "{{ containers }}"
