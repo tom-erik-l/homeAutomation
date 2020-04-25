@@ -3,7 +3,7 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {   "label": "Deploy all",
+        {   "label": "Deploy all cartmanSetupPlaybook",
             "type": "shell",
             "options": { 
                 "shell": {
@@ -18,7 +18,7 @@
             "problemMatcher": []
         },
 
-        {   "label": "Deploy docker containers",
+        {   "label": "Deploy all docker containers",
             "type": "shell",
             "options": { 
                 "shell": {
@@ -96,8 +96,7 @@
             "problemMatcher": []
         },
 
-        {
-            "label": "Build initialServerSetupPlaybook",
+        {   "label": "Build initialServerSetupPlaybook",
             "type": "shell",
             "options": {
                 "shell": {
