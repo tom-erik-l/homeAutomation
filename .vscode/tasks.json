@@ -3,12 +3,27 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {   "label": "Build cartmanSetupPlaybook",
+        {   "label": "Deploy all",
             "type": "shell",
-            "options": {
+            "options": { 
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy docker containers",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
                 }
             },
             "command": [
@@ -20,6 +35,67 @@
             },
             "problemMatcher": []
         },
+
+        {   "label": "Deploy transmission container",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='transmission' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy portainer container",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='portainer' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy plex container",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='plex' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy pi_hole container",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pi_hole' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
         {
             "label": "Build initialServerSetupPlaybook",
             "type": "shell",
@@ -32,9 +108,6 @@
             "command": [
                 "ansible-playbook 'ansible/initialServerSetupPlaybook.yml' -i 'ansible/hosts.yml'"
             ],
-            "presentation": {
-                "reveal": "always"
-            },
             "problemMatcher": [],
             "group": "build"
         }

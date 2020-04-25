@@ -26,8 +26,11 @@
   # - debug:
   #     var: ansible_facts.services
 
+  vars:
+    restart_containers: true
+
   roles:
-    - {role: mergerfs}
-    - {role: samba}
+    - {role: mergerfs, tags: mergerfs}
+    - {role: samba, tags: samba}
     - {role: docker, tags: docker}
     - {role: docker_container, tags: docker_container}

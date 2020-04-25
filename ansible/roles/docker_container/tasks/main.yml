@@ -1,130 +1,27 @@
-- name: plex container
-  docker_container:
-    name: plex
-    image: linuxserver/plex
-    env:
-      PUID: "{{ PUID }}"
-      PGID: "{{ PGID }}"
-      VERSION: "docker"
-    volumes:
-      - /opt/appdata/plex:/config
-      - /mnt/storage/TV Shows:/tv
-      - /mnt/storage/Movies:/movies
-      - /mnt/storage/Music:/Music
-    network_mode: host
-    pull: yes
-    restart: yes
-    state: started
-    restart_policy: unless-stopped 
-    # Doesn't work for some reason
-    # healthcheck:
-      # test: "CMD curl ${CURL_OPTS} 'http://localhost:32400/identity' >/dev/null"
-  become: true
+- include_tasks: 
+    file: plex.yml
+    apply: 
+      tags:
+        plex
+  tags: always 
 
-- name: allow plex in UFW firewall
-  ufw:
-    rule: allow
-    proto: tcp
-    port: "32400"
-  become: true
+- include_tasks: 
+    file: portainer.yml
+    apply: 
+      tags:
+        portainer
+  tags: always  
 
-- name: create SSL folder
-  file:
-    path: "{{sslPath}}"
-    state: directory
-    owner: root
-    group: root
-  become: true
+- include_tasks: 
+    file: transmission.yml
+    apply: 
+      tags:
+        transmission
+  tags: always  
 
-- name: portainer SSL privatekey 
-  openssl_privatekey:
-    path: "{{sslPath}}/portainer.key"
-    curve: secp384r1 
-  become: true
-
-- name: portainer SSL certificate signing request
-  openssl_csr:
-    path: "{{sslPath}}/portainer.csr"
-    privatekey_path: "{{sslPath}}/portainer.key"
-    common_name: portainer
-  become: true
-
-- name: portainer SSL certificate
-  openssl_certificate:
-    path: "{{sslPath}}/portainer.crt"
-    privatekey_path: "{{sslPath}}/portainer.key"
-    csr_path: "{{sslPath}}/portainer.csr"
-    provider: selfsigned
-    entrust_not_after: +3650d
-  become: true
-
-- name: portainer container
-  docker_container: 
-    name: portainer
-    image: portainer/portainer
-    volumes:
-    - /opt/appdata/portainer:/data
-    - /var/run/docker.sock:/var/run/docker.sock
-    - "{{sslPath}}:/certs"
-    network_mode: host
-    pull: yes
-    restart: yes
-    state: started
-    restart_policy: always
-    command:
-      --ssl 
-      --sslcert /certs/portainer.crt 
-      --sslkey /certs/portainer.key
-  become: true
-
-- name: allow portainer in UFW firewall
-  ufw:
-    rule: allow
-    proto: tcp
-    port: "9000"
-  become: true
-
-- include_vars: vault.yml
-
-- name: transmission container
-  docker_container:
-    name: transmission
-    image: linuxserver/transmission
-    env:
-      PUID: "{{ PUID }}"
-      PGID: "{{ PGID }}"
-      TZ: "Europe/London"
-      TRANSMISSION_WEB_HOME: "/transmission-web-control/"
-      USER: "{{ transmissionWebUIUser }}" 
-      PASS: "{{ transmissionWebUIPassword }}" 
-    volumes:
-      - /opt/appdata/transmission:/config
-      - /mnt/storage:/downloads
-      - /mnt/storage/transmissionWatch:/watch
-    network_mode: host
-    # pull: yes
-    restart: yes
-    state: started
-    restart_policy: unless-stopped 
-  become: true
-
-- name: allow transmission in UFW firewall
-  ufw:
-    rule: allow
-    proto: tcp
-    port: "9091"
-  become: true
-
-- name: allow transmission in UFW firewall
-  ufw:
-    rule: allow
-    proto: tcp
-    port: "51413"
-  become: true
-
-- name: allow transmission in UFW firewall
-  ufw:
-    rule: allow
-    proto: udp
-    port: "51413"
-  become: true 
+- include_tasks: 
+    file: pi_hole.yml
+    apply: 
+      tags:
+        pi_hole
+  tags: always  
