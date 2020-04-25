@@ -1,0 +1,44 @@
+- include_vars: vault.yml
+
+- name: transmission container
+  docker_container:
+    name: transmission
+    image: linuxserver/transmission
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "Europe/London"
+      TRANSMISSION_WEB_HOME: "/transmission-web-control/"
+      USER: "{{ transmissionWebUIUser }}" 
+      PASS: "{{ transmissionWebUIPassword }}" 
+    volumes:
+      - /opt/appdata/transmission:/config
+      - /mnt/storage:/downloads
+      - /mnt/storage/transmissionWatch:/watch
+    network_mode: host
+    # pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped 
+  become: true
+
+- name: allow transmission in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "9091"
+  become: true
+
+- name: allow transmission in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "51413"
+  become: true
+
+- name: allow transmission in UFW firewall
+  ufw:
+    rule: allow
+    proto: udp
+    port: "51413"
+  become: true 

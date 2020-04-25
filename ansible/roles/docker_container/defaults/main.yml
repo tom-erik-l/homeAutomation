@@ -1,9 +1,5 @@
 CURL_OPTS: "--connect-timeout 15 --silent --show-error --fail"
 TARGET: localhost
 
-# User and group stuff for docker 
-PUID: "1050"
-PGID: "1050"
-
 # SSL Stuff
 sslPath: "/home/tom-erik/.ssl"

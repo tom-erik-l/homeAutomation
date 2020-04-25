@@ -1,0 +1,55 @@
+- name: create SSL folder
+  file:
+    path: "{{sslPath}}"
+    state: directory
+    owner: root
+    group: root
+  become: true
+
+- name: portainer SSL privatekey 
+  openssl_privatekey:
+    path: "{{sslPath}}/portainer.key"
+    curve: secp384r1 
+  become: true
+
+- name: portainer SSL certificate signing request
+  openssl_csr:
+    path: "{{sslPath}}/portainer.csr"
+    privatekey_path: "{{sslPath}}/portainer.key"
+    common_name: portainer
+  become: true
+
+- name: portainer SSL certificate
+  openssl_certificate:
+    path: "{{sslPath}}/portainer.crt"
+    privatekey_path: "{{sslPath}}/portainer.key"
+    csr_path: "{{sslPath}}/portainer.csr"
+    provider: selfsigned
+    entrust_not_after: +3650d
+  become: true
+
+- name: portainer container
+  docker_container: 
+    name: portainer
+    image: portainer/portainer
+    volumes:
+    - /opt/appdata/portainer:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    - "{{sslPath}}:/certs"
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: always
+    command:
+      --ssl 
+      --sslcert /certs/portainer.crt 
+      --sslkey /certs/portainer.key
+  become: true
+
+- name: allow portainer in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "9000"
+  become: true
