@@ -7,9 +7,10 @@
     - plex
     - portainer
     - transmission
-    - pi_hole
+    - pihole
     PUID: "1050" # User and group for docker 
     PGID: "1050"
+    timeZone: "Europe/Copenhagen"
 
   tasks:
   - name: test connection with -m ping
