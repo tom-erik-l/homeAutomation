@@ -1,3 +1,13 @@
+- name: create docker appdata base directory
+  file:
+    dest: "{{ appdata }}/{{item}}"
+    state: directory
+    owner: "{{dockeruser}}"
+    group: "{{dockergroup}}"
+  with_items: "{{ containers }}"
+  tags: always
+  become: true
+
 - include_tasks: 
     file: "{{ item }}.yml"
     apply: 
