@@ -20,7 +20,9 @@
         browsable = yes
         create mask = 0644
         directory mask = 0755
-    validate: 'testparm -s %s'
+        hide unreadable = yes #
+        veto files = /lost+found/ #Alternatively use "hide files" (but is shown with hidden files shown in Windows)
+    validate: 'testparm -s %s' 
   become: true
   notify:
     - restart nmbd
