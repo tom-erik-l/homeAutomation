@@ -109,8 +109,24 @@
             ],
             "problemMatcher": [],
             "group": "build"
-        }
+        },
+
+        {   "label": "lint all cartmanSetupPlaybook",
+            "type": "shell",
+            "options": { 
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
+                }
+            },
+            "command": [
+                "ansible-lint 'ansible/cartmanSetupPlaybook.yml'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        }    
     ]
 }
 
 
+  
