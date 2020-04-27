@@ -81,7 +81,7 @@
             "problemMatcher": []
         },
 
-        {   "label": "Deploy pi_hole container",
+        {   "label": "Deploy pihole container",
             "type": "shell",
             "options": { 
                 "shell": {
@@ -90,7 +90,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pi_hole'"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pihole' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []

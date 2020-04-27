@@ -1,0 +1,46 @@
+- include_vars: vault.yml
+
+- name: pihole container
+  docker_container:
+    name: pihole
+    image: pihole/pihole
+    env: 
+      TZ: "{{ timeZone }}"
+      ServerIP: "{{ ansible_default_ipv4.address }}"
+      WEBPASSWORD: "{{ piHoleWebUIPassword }}"
+      DNS1: 8.8.8.8 # Google DNS servers for upstream 
+      DNS2: 8.8.4.4
+    volumes:
+      - '/opt/appdata/pihole/:/etc/pihole/'
+      - '/opt/appdata/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    network_mode: host
+    dns_servers:
+    - 127.0.0.1
+    - 1.1.1.1
+    capabilities:
+    - NET_ADMIN
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped 
+  become: true
+
+- name: allow pihole in UFW firewall
+  ufw:
+    rule: allow
+    proto: "{{ UFW_item.proto }}"
+    port: "{{ UFW_item.port }}"
+  with_items:
+    - {port: 80, proto: tcp}
+    - {port: 53, proto: tcp}
+    - {port: 53, proto: udp}
+    - {port: 67, proto: tcp}
+    - {port: 67, proto: udp}
+  loop_control:
+    loop_var: UFW_item
+  become: true
+
+
+
+
+# Port 443 is to provide a sinkhole for ads that use SSL. If only port 80 is used, then blocked HTTPS queries will fail to connect to port 443 and may cause long loading times. Rejecting 443 on your firewall can also serve this same purpose. Ubuntu firewall example: sudo ufw reject https

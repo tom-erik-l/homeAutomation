@@ -71,18 +71,6 @@
     group: "{{dockergroup}}"
   become: true
 
-- name: create docker appdata base directory
-  file:
-    dest: "{{ appdata }}/{{item}}"
-    state: directory
-    owner: "{{dockeruser}}"
-    group: "{{dockergroup}}"
-  with_items:
-    - plex
-    - portainer
-    - transmission
-  become: true
-
 - name: set docker PUID and PGID environment variables for docker stack
   blockinfile:
     path: /etc/environment
