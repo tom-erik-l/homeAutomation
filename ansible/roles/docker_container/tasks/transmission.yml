@@ -7,14 +7,14 @@
     env:
       PUID: "{{ PUID }}"
       PGID: "{{ PGID }}"
-      TZ: "Europe/London"
+      TZ: "{{ timeZone }}"
       TRANSMISSION_WEB_HOME: "/transmission-web-control/"
       USER: "{{ transmissionWebUIUser }}" 
       PASS: "{{ transmissionWebUIPassword }}" 
     volumes:
       - /opt/appdata/transmission:/config
       - /mnt/storage:/downloads
-      - /mnt/storage/transmissionWatch:/watch
+      - /home/tom-erik/transmissionWatch:/watch
     network_mode: host
     # pull: yes
     restart: "{{ restart_containers }}"
