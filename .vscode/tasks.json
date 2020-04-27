@@ -55,17 +55,12 @@
             "type": "shell",
             "options": { 
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\wsl.exe",
-                    "args": [ "-e" ] 
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
                 }
             },
-            "command": "ansible-playbook",
-            "args":[
-                {
-                    "value": "${workspaceFolder}\\ansible\\cartmanSetupPlaybook.yml -i ${workspaceFolder}\\ansible\\hosts.yml --tags='portainer'",
-                    "quoting": "escape" 
-                }
-             
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='portainer'"
             ],
             "group": "build",
             "problemMatcher": []
@@ -120,13 +115,12 @@
             "type": "shell",
             "options": { 
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\wsl.exe",
-                    "args": [ "-e" ] 
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ] 
                 }
             },
             "command": [
-                "echo $PATH"
-                // "ansible-lint 'ansible/cartmanSetupPlaybook.yml'"
+                "ansible-lint 'ansible/cartmanSetupPlaybook.yml'"
             ],
             "group": "build",
             "problemMatcher": []
