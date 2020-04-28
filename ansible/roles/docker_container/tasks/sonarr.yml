@@ -1,0 +1,26 @@
+- name: sonarr container
+  docker_container:
+    name: sonarr
+    image: linuxserver/sonarr
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone }}"
+      UMASK_SET: "022" #optional
+    volumes:
+      - /opt/appdata/sonarr:/config
+      - /mnt/storage/TV Shows:/tv
+      - /mnt/storage/downloads/managed:/downloads
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow sonarr in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8989"
+  become: true

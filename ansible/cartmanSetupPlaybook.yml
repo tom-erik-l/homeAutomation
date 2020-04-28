@@ -9,6 +9,7 @@
     - transmission
     - pihole
     - tautulli
+    - sonarr
     PUID: "1050" # User and group for docker
     PGID: "1050"
     timeZone: "Europe/Copenhagen"
