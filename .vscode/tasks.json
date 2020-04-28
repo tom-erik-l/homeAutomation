@@ -135,7 +135,7 @@
                 }
             },
             "command": [
-                "ansible-lint 'ansible/cartmanSetupPlaybook.yml'"
+                "ansible-lint -x ANSIBLE0002 'ansible/cartmanSetupPlaybook.yml' "
             ],
             "group": "build",
             "problemMatcher": []
