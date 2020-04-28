@@ -111,6 +111,21 @@
             "problemMatcher": []
         },
 
+        {   "label": "Deploy radarr container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='radarr'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
         {   "label": "Build initialServerSetupPlaybook",
             "type": "shell",
             "options": {
