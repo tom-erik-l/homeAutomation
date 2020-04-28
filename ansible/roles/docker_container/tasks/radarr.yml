@@ -1,0 +1,26 @@
+- name: radarr container
+  docker_container:
+    name: radarr
+    image: linuxserver/radarr
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone }}"
+      UMASK_SET: "022" #optional
+    volumes:
+      - /opt/appdata/radarr:/config
+      - /mnt/storage/movies:/tv
+      - /mnt/storage/downloads/managed:/downloads
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow radarr in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "7878"
+  become: true
