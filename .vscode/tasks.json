@@ -5,10 +5,10 @@
     "tasks": [
         {   "label": "Deploy all cartmanSetupPlaybook",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
@@ -20,10 +20,10 @@
 
         {   "label": "Deploy all docker containers",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
@@ -38,10 +38,10 @@
 
         {   "label": "Deploy transmission container",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
@@ -53,10 +53,10 @@
 
         {   "label": "Deploy portainer container",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
@@ -68,10 +68,10 @@
 
         {   "label": "Deploy plex container",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
@@ -83,14 +83,29 @@
 
         {   "label": "Deploy pihole container",
             "type": "shell",
-            "options": { 
+            "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ] 
+                    "args": [ "-c" ]
                 }
             },
             "command": [
                 "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pihole' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy tautilli container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='tautulli'"
             ],
             "group": "build",
             "problemMatcher": []
@@ -109,6 +124,21 @@
             ],
             "problemMatcher": [],
             "group": "build"
+        },
+
+        {   "label": "lint all cartmanSetupPlaybook",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-lint 'ansible/cartmanSetupPlaybook.yml'"
+            ],
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

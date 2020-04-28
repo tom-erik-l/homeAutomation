@@ -1,6 +1,6 @@
 #Run the playbook by:
-#ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml 
-- hosts: cartmanAnsibleAdmin 
+#ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml
+- hosts: cartmanAnsibleAdmin
   vars:
     restart_containers: false
     containers: # Docker containers
@@ -8,13 +8,14 @@
     - portainer
     - transmission
     - pihole
-    PUID: "1050" # User and group for docker 
+    - tautulli
+    PUID: "1050" # User and group for docker
     PGID: "1050"
     timeZone: "Europe/Copenhagen"
 
   tasks:
   - name: test connection with -m ping
-    ping: 
+    ping:
 
   - name: who am I?
     command: whoami
@@ -29,7 +30,8 @@
         - python
         - git
       state: present
-    become: true    
+    become: true
+
 
   # - name: populate service facts
   #   service_facts:
@@ -37,7 +39,7 @@
   #     var: ansible_facts.services
 
   roles:
-    - {role: mergerfs, tags: mergerfs}
-    - {role: samba, tags: samba}
-    - {role: docker, tags: docker}
-    - {role: docker_container, tags: docker_container}
+  - {role: mergerfs, tags: mergerfs}
+  - {role: samba, tags: samba}
+  - {role: docker, tags: docker}
+  - {role: docker_container, tags: docker_container}
