@@ -1,0 +1,24 @@
+- name: tautulli container
+  docker_container:
+    name: tautulli
+    image: linuxserver/tautulli
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone}} "
+    volumes:
+      - /opt/appdata/tautulli:/config
+      - /opt/appdata/plex:/logs
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow tautulli in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8181"
+  become: true
