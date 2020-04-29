@@ -9,36 +9,41 @@
       PGID: "{{ PGID }}"
       TZ: "{{ timeZone }}"
       TRANSMISSION_WEB_HOME: "/transmission-web-control/"
-      USER: "{{ transmissionWebUIUser }}" 
-      PASS: "{{ transmissionWebUIPassword }}" 
+      USER: "{{ transmissionWebUIUser }}"
+      PASS: "{{ transmissionWebUIPassword }}"
     volumes:
       - /opt/appdata/transmission:/config
       - /mnt/storage:/downloads
+      - /mnt/storage/downloads/complete:/downloads/complete
+      - /mnt/storage/downloads/incomplete:/downloads/incomplete
       - /home/tom-erik/transmissionWatch:/watch
     network_mode: host
     # pull: yes
     restart: "{{ restart_containers }}"
     state: started
-    restart_policy: unless-stopped 
+    restart_policy: unless-stopped
+  become: true
+
+- name: clean up transmission docker dirs
+  file:
+    path: "{{ file_item }}"
+    state: absent
+  with_items:
+  - /mnt/storage/complete
+  - /mnt/storage/complete
+  loop_control:
+    loop_var: file_item
   become: true
 
 - name: allow transmission in UFW firewall
   ufw:
     rule: allow
-    proto: tcp
-    port: "9091"
+    proto: "{{ UFW_item.proto }}"
+    port: "{{ UFW_item.port }}"
+  with_items:
+    - {port: 9091, proto: tcp}
+    - {port: 51413, proto: tcp}
+    - {port: 51413, proto: udp}
+  loop_control:
+    loop_var: UFW_item
   become: true
-
-- name: allow transmission in UFW firewall
-  ufw:
-    rule: allow
-    proto: tcp
-    port: "51413"
-  become: true
-
-- name: allow transmission in UFW firewall
-  ufw:
-    rule: allow
-    proto: udp
-    port: "51413"
-  become: true 
