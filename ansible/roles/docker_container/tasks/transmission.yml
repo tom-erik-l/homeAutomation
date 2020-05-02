@@ -12,10 +12,9 @@
       USER: "{{ transmissionWebUIUser }}"
       PASS: "{{ transmissionWebUIPassword }}"
     volumes:
-      - /opt/appdata/transmission:/config
-      - /mnt/storage:/downloads
-      - /mnt/storage/downloads/complete:/downloads/complete
-      - /mnt/storage/downloads/incomplete:/downloads/incomplete
+      - "{{ appData }}/transmission:/config"
+      - "{{ storageData }}:{{ storageData }}"
+      - "{{ storageData }}/empty:/downloads"
       - /home/tom-erik/transmissionWatch:/watch
     network_mode: host
     # pull: yes
@@ -30,7 +29,7 @@
     state: absent
   with_items:
   - /mnt/storage/complete
-  - /mnt/storage/complete
+  - /mnt/storage/incomplete
   loop_control:
     loop_var: file_item
   become: true

@@ -6,10 +6,10 @@
     group: root
   become: true
 
-- name: portainer SSL privatekey 
+- name: portainer SSL privatekey
   openssl_privatekey:
     path: "{{sslPath}}/portainer.key"
-    curve: secp384r1 
+    curve: secp384r1
   become: true
 
 - name: portainer SSL certificate signing request
@@ -29,11 +29,11 @@
   become: true
 
 - name: portainer container
-  docker_container: 
+  docker_container:
     name: portainer
     image: portainer/portainer
     volumes:
-    - /opt/appdata/portainer:/data
+    - "{{ appData }}/portainer:/data"
     - /var/run/docker.sock:/var/run/docker.sock
     - "{{sslPath}}:/certs"
     network_mode: host
@@ -42,8 +42,8 @@
     state: started
     restart_policy: always
     command:
-      --ssl 
-      --sslcert /certs/portainer.crt 
+      --ssl
+      --sslcert /certs/portainer.crt
       --sslkey /certs/portainer.key
   become: true
 

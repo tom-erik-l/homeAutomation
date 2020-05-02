@@ -4,15 +4,15 @@
   docker_container:
     name: pihole
     image: pihole/pihole
-    env: 
+    env:
       TZ: "{{ timeZone }}"
       ServerIP: "{{ ansible_default_ipv4.address }}"
       WEBPASSWORD: "{{ piHoleWebUIPassword }}"
-      DNS1: 8.8.8.8 # Google DNS servers for upstream 
+      DNS1: 8.8.8.8 # Google DNS servers for upstream
       DNS2: 8.8.4.4
     volumes:
-      - '/opt/appdata/pihole/:/etc/pihole/'
-      - '/opt/appdata/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+      - "{{ appData }}/pihole/:/etc/pihole/"
+      - "{{ appData }}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/"
     network_mode: host
     dns_servers:
     - 127.0.0.1
@@ -22,7 +22,7 @@
     pull: yes
     restart: "{{ restart_containers }}"
     state: started
-    restart_policy: unless-stopped 
+    restart_policy: unless-stopped
   become: true
 
 - name: allow pihole in UFW firewall

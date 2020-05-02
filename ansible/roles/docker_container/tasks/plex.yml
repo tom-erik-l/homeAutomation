@@ -7,15 +7,15 @@
       PGID: "{{ PGID }}"
       VERSION: "docker"
     volumes:
-      - /opt/appdata/plex:/config
-      - /mnt/storage/TV Shows:/tv
-      - /mnt/storage/Movies:/movies
-      - /mnt/storage/Music:/Music
+      - "{{ appData }}/plex:/config"
+      - "{{ storageData }}/TV Shows:/{{ storageData }}/TV Shows"
+      - "{{ storageData }}/Movies:{{ storageData }}/Movies/movies"
+      - "{{ storageData }}/Music:{{ storageData }}/Music"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"
     state: started
-    restart_policy: unless-stopped 
+    restart_policy: unless-stopped
     # Doesn't work for some reason
     # healthcheck:
       # test: "CMD curl ${CURL_OPTS} 'http://localhost:32400/identity' >/dev/null"

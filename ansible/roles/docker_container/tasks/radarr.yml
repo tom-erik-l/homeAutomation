@@ -8,9 +8,8 @@
       TZ: "{{ timeZone }}"
       UMASK_SET: "022" #optional
     volumes:
-      - /opt/appdata/radarr:/config
-      - /mnt/storage/movies:/tv
-      - /mnt/storage/downloads/managed:/downloads
+      - "{{ appData }}/radarr:/config"
+      - "{{ storageData }}:{{ storageData }}"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"

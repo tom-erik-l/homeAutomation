@@ -8,9 +8,8 @@
       TZ: "{{ timeZone }}"
       UMASK_SET: "022" #optional
     volumes:
-      - /opt/appdata/sonarr:/config
-      - /mnt/storage/TV Shows:/tv
-      - /mnt/storage/downloads/managed:/downloads
+      - "{{ appData }}/sonarr:/config"
+      - "{{ storageData }}:{{ storageData }}"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"

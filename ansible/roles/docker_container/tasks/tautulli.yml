@@ -7,8 +7,8 @@
       PGID: "{{ PGID }}"
       TZ: "{{ timeZone}} "
     volumes:
-      - /opt/appdata/tautulli:/config
-      - /opt/appdata/plex:/logs
+      - "{{ appData }}/tautulli:/config"
+      - "{{ appData }}/plex:/logs"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"
