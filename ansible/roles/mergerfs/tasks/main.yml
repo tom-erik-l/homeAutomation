@@ -1,17 +1,17 @@
 #Create mount points
 #Alternatively, do it manually using: sudo mkdir /path/to/mountpoint
 - name: create /mnt points
-  file: 
+  file:
     path: /mnt/{{item.name}}
     state: directory
     mode: 0777
   with_items: "{{mntpoints}}"
   become: true
-  
+
 # - name: debug mount points
-#   debug: 
+#   debug:
 #     msg: mountpoint is = /mnt/{{item.name}}
-#   with_items: "{{mntpoints}}"  
+#   with_items: "{{mntpoints}}"
 
 #Mount the disks
 #The mount  module always reports changed for some stupid reason.
@@ -31,21 +31,21 @@
     pkg:
       - mergerfs
     state: present
-  become: true     
-    
+  become: true
+
 #Create and mount the mergerfs file system
 - name: add fstab entry for mergerfs array
   mount:
     name: /mnt/storage
     src: /mnt/disk*
-    opts: defaults,allow_other,direct_io,use_ino,hard_remove,dropcacheonclose=true,fsname=mergerfs
+    opts: defaults,allow_other,direct_io,use_ino,hard_remove,dropcacheonclose=true,fsname=mergerfs,category.create=epmfs
     fstype: fuse.mergerfs
-    state: present 
+    state: present
   become: true
 
 - name: reload fstab
   # Needed to add this for mounts to appear properly, without rebooting
   # https://unix.stackexchange.com/questions/477794/how-to-force-os-reload-of-fstab
-  systemd: 
+  systemd:
     daemon_reload: yes
   become: true
