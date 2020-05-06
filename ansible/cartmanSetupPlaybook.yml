@@ -2,7 +2,7 @@
 #ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml
 - hosts: cartmanAnsibleAdmin
   vars:
-    restart_containers: true
+    restart_containers: false
     containers: # Docker containers
     - plex
     - portainer
@@ -11,6 +11,7 @@
     - tautulli
     - sonarr
     - radarr
+    - organizr
     appData: /opt/appdata
     storageData: /mnt/storage
     PUID: "1050" # User and group for docker

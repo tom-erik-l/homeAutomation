@@ -8,9 +8,9 @@
   tags: always
   become: true
 
-- include_tasks: 
+- include_tasks:
     file: "{{ item }}.yml"
-    apply: 
+    apply:
       tags:
         "{{ item }}"
   tags: always

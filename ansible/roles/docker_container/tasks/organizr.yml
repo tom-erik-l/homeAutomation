@@ -1,0 +1,26 @@
+- name: organizr container
+  docker_container:
+    name: organizr
+    image: linuxserver/organizr
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone }}"
+    volumes:
+      - "{{ appData }}/organizr:/config"
+    published_ports:
+      - "9983:80"
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow organizr in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "9983"
+  become: true
+
+
