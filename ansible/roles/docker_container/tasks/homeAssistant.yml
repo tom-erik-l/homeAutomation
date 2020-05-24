@@ -1,0 +1,21 @@
+- name: homeAssistant container
+  docker_container:
+    name: homeAssistant
+    image: homeassistant/home-assistant:stable
+    env:
+      TZ: "{{ timeZone}} "
+    volumes:
+      - "{{ appData }}/homeAssistant:/config"
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow homeAssistant in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8123"
+  become: true
