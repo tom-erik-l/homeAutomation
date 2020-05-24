@@ -13,6 +13,8 @@
     - radarr
     # - organizr
     - bazarr
+    - homeAssistant
+    - lidarr
     appData: /opt/appdata
     storageData: /mnt/storage
     PUID: "1050" # User and group for docker

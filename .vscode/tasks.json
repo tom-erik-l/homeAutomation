@@ -126,6 +126,51 @@
             "problemMatcher": []
         },
 
+        {   "label": "Deploy sonarr container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='sonarr'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy homeAssistant container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='homeAssistant'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy homeAssistant container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='lidarr'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
         {   "label": "Deploy organizr container",
             "type": "shell",
             "options": {
