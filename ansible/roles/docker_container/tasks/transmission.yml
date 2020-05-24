@@ -15,7 +15,7 @@
       - "{{ appData }}/transmission:/config"
       - "{{ storageData }}:{{ storageData }}"
       - "{{ storageData }}/empty:/downloads"
-      - /home/tom-erik/transmissionWatch:/watch
+      - /home/tom-erik/sambashare/transmissionWatch:/watch
     network_mode: host
     # pull: yes
     restart: "{{ restart_containers }}"
