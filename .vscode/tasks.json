@@ -156,7 +156,7 @@
             "problemMatcher": []
         },
 
-        {   "label": "Deploy homeAssistant container",
+        {   "label": "Deploy lidarr container",
             "type": "shell",
             "options": {
                 "shell": {
