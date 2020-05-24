@@ -1,0 +1,29 @@
+- name: lidarr container
+  docker_container:
+    name: lidarr
+    image: linuxserver/lidarr
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone }}"
+      UMASK_SET: "022" #optional
+    volumes:
+      - "{{ appData }}/lidarr:/config"
+      - "{{ storageData }}:{{ storageData }}"
+      - "{{ storageData }}/empty:/downloads"
+      - "{{ storageData }}/empty:/music"
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow lidarr in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8686"
+  become: true
+
+
