@@ -10,6 +10,7 @@
     volumes:
       - "{{ appData }}/radarr:/config"
       - "{{ storageData }}:{{ storageData }}"
+      - "{{ storageData }}/empty:/movies"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"

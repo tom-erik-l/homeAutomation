@@ -6,11 +6,12 @@
       PUID: "{{ PUID }}"
       PGID: "{{ PGID }}"
       VERSION: "docker"
+      UMASK_SET: "022"
     volumes:
       - "{{ appData }}/plex:/config"
-      - "{{ storageData }}/TV Shows:/{{ storageData }}/TV Shows"
-      - "{{ storageData }}/Movies:{{ storageData }}/Movies/movies"
-      - "{{ storageData }}/Music:{{ storageData }}/Music"
+      - "{{ storageData }}:{{ storageData }}"
+      - "{{ storageData }}/empty:/movies"
+      - "{{ storageData }}/empty:/tv"
     network_mode: host
     pull: yes
     restart: "{{ restart_containers }}"
