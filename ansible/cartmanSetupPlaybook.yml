@@ -11,7 +11,7 @@
     - tautulli
     - sonarr
     - radarr
-    # - organizr
+    - organizr
     - bazarr
     - homeAssistant
     - lidarr
