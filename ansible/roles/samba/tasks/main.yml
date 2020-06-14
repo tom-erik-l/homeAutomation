@@ -22,6 +22,16 @@
         directory mask = 0755
         # hide unreadable = yes #
         hide files = /lost+found/ #Alternatively use "hide files" (but is shown with hidden files shown in Windows)
+
+      [homeAssisstant]
+        comment = homeAssisstant@cartman
+        path = /opt/appdata/homeAssistant
+        read only = no
+        browsable = yes
+        create mask = 0644
+        directory mask = 0755
+        # hide unreadable = yes #
+        hide files = /lost+found/ #Alternatively use "hide files" (but is shown with hidden files shown in Windows)
     validate: 'testparm -s %s'
   become: true
   notify:
