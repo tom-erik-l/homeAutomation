@@ -1,0 +1,27 @@
+- name: tdarr container
+  docker_container:
+    name: tdarr
+    image: haveagitgat/tdarr
+    env:
+      PUID: "{{ PUID }}"
+      PGID: "{{ PGID }}"
+      TZ: "{{ timeZone }}"
+    volumes:
+      - "{{ appData }}/tdarr:/home/Tdarr/Documents/Tdarr"
+      - "{{ appData }}/tdarr/db:/var/lib/mongodb"
+      - "{{ storageData }}:{{ storageData }}"
+      - /mnt/storage/transcodecache:/home/Tdarr/cache
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow tdarr in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8265"
+  become: true
