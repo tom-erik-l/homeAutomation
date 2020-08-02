@@ -1,13 +1,13 @@
 #Run the playbook by:
-#ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml  -K 
-#do not add: -u tom-erik 
+#ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml  -K
+#do not add: -u tom-erik
 #Will cause error according to: https://stackoverflow.com/questions/40983674/ansible-non-root-sudo-user-and-become-privilege-escalation
 
-- hosts: cartman
+- hosts: cartmanAnsibleAdmin
 
   tasks:
   - name: test connection with -m ping
-    ping: 
+    ping:
 
   - name: who am I?
     command: whoami
@@ -17,13 +17,13 @@
   - include_role:
       name: ansibleAndServerSetup
 
-  # - name: create filesystems on disks without
-  #   filesystem:
-  #     force: no 
-  #     fstype: ext4
-  #     dev: "{{item}}"
-  #   loop: 
-  #     - /dev/sda1
-  #     - /dev/sdb1
-  #     - /dev/sdd1
-  #   become: true
+  - name: create filesystems on disks without
+    filesystem:
+      force: no
+      fstype: ext4
+      dev: "{{item}}"
+    loop:
+      - /dev/sda1
+      # - /dev/sdb1
+      # - /dev/sdd1
+    become: true
