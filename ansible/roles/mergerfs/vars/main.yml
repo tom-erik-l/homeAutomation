@@ -1,14 +1,15 @@
 # Verify that the dev: and UUID: matches !!!
 mntpoints:
   #- { name: parity1, src: /dev/disk/by-id/ata-Hitachi_HDS5C3030ALA630_MJ1311YNG4GE8A-part1}
-  - { name: disk1, dev: /dev/sda1, type: ext4, UUID: 4a08613a-b80f-43cb-89d2-b6dd98a898b9} #1TB
-  - { name: disk2, dev: /dev/sdb1, type: ext4, UUID: a1623df1-fff4-4681-9155-62f5708d7851} #WD MyBook 12TB 
-  - { name: disk3, dev: /dev/sdd1 ,type: ext4, UUID: abc024ce-88fa-4c23-899b-b265416b23cc} #WD Elements 12TB
+  - { name: disk1, type: ext4, UUID: 4a08613a-b80f-43cb-89d2-b6dd98a898b9} #1TB
+  - { name: disk2, type: ext4, UUID: a1623df1-fff4-4681-9155-62f5708d7851} #WD MyBook 12TB
+  - { name: disk3, type: ext4, UUID: abc024ce-88fa-4c23-899b-b265416b23cc} #WD Elements 12TB
+  - { name: disk4, type: ext4, UUID: 0780b95c-0808-4b5e-908a-716ff4dd3a23} #WD Elements 12TB Amazon.cd 03/06/2020
 
-# Swapping drives: 
+# Swapping drives:
 # Start PC med alle gamle diske
 # Tjek smart data for at finde ud af hvilken af de gamle som er dårlige
-# Find ud af hvilken det er fysisk 
-# Remove entry for bad drive in fstab 
+# Find ud af hvilken det er fysisk
+# Remove entry for bad drive in fstab
 
 
