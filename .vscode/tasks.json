@@ -201,6 +201,21 @@
             "problemMatcher": []
         },
 
+        {   "label": "Deploy tdarr container",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='tdarr'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
         {   "label": "Deploy **rr containers",
             "type": "shell",
             "options": {
@@ -256,6 +271,21 @@
             },
             "command": [
                 "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='samba'"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+
+        {   "label": "Deploy rclone role",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='rclone'"
             ],
             "group": "build",
             "problemMatcher": []
