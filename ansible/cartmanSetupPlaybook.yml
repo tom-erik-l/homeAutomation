@@ -2,12 +2,12 @@
 #ansible-playbook initialServerSetupPlaybook.yml -i hosts.yaml
 - hosts: cartmanAnsibleAdmin
   vars:
-    restart_containers: false
+    restart_containers: true
     containers: # Docker containers
     - plex
     - portainer
     - transmission
-    - pihole
+    #- pihole
     - tautulli
     - sonarr
     - radarr
@@ -15,6 +15,7 @@
     - bazarr
     - homeAssistant
     - lidarr
+    #- tdarr
     appData: /opt/appdata
     storageData: /mnt/storage
     PUID: "1050" # User and group for docker
@@ -37,9 +38,10 @@
         - curl
         - python
         - git
+        - nethogs
+        - tree
       state: present
     become: true
-
 
   # - name: populate service facts
   #   service_facts:
@@ -51,3 +53,4 @@
   - {role: samba, tags: samba}
   - {role: docker, tags: docker}
   - {role: docker_container, tags: docker_container}
+  - {role: ansible-rclone, tags: rclone}
