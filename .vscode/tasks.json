@@ -289,6 +289,21 @@
             ],
             "group": "build",
             "problemMatcher": []
+        },
+
+        {   "label": "Deploy snapraid role",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid'"
+            ],
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

@@ -43,10 +43,10 @@
       state: present
     become: true
 
-  # - name: populate service facts
-  #   service_facts:
-  # - debug:
-  #     var: ansible_facts.services
+  - name: populate service facts
+    service_facts:
+  - debug:
+      var: ansible_facts.services
 
   roles:
   - {role: mergerfs, tags: mergerfs}
@@ -54,3 +54,4 @@
   - {role: docker, tags: docker}
   - {role: docker_container, tags: docker_container}
   - {role: ansible-rclone, tags: rclone}
+  - {role: snapraid, tags: snapraid}
