@@ -1,2 +1,8 @@
 parity_disks:
     - {path: /mnt/parity1}
+
+data_disks:
+    - {path: /mnt/disk1, present: false, content: false} #This disk has been removed (old 1TB)
+    - {path: /mnt/disk2, present: true, content: true}
+    - {path: /mnt/disk3, present: true, content: true}
+    - {path: /mnt/disk4, present: true, content: true}

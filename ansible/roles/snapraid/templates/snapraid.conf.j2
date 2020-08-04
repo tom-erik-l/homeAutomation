@@ -17,7 +17,9 @@ content {{ disk.path }}/.snapraid.content
 
 # Data disks
 {% for disk in data_disks %}
+{% if disk.present == true %}
 disk d{{ loop.index }} {{ disk.path }}
+{% endif %}
 {% endfor %}
 
 # Excludes hidden files and directories (uncomment to enable).
