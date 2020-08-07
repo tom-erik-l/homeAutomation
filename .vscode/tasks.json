@@ -315,7 +315,7 @@
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid'"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []

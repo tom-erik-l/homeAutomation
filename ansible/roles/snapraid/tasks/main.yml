@@ -5,5 +5,5 @@
 - name: configure snapraid
   include_tasks: configure.yml
 
-# - name: automate parity checks
-#   include_tasks: parity-checks.yml
+- name: automate parity checks
+  include_tasks: parity_checks.yml

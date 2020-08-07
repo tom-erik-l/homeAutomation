@@ -1,7 +1,10 @@
+- include_vars: vault.yml
+
 - name: clone snapraid-runner
   git:
     repo: https://github.com/Chronial/snapraid-runner.git
     dest: /opt/snapraid-runner
+  become: true
 
 - name: install snapraid-runner configuration file
   template:
@@ -10,6 +13,7 @@
     owner: root
     group: root
     mode: 0775
+  become: true
 
 - name: setup cron job snapraid-runner
   cron:
@@ -22,3 +26,4 @@
     dom: "{{ item.dom|default('*') }}"
   with_items:
     - "{{ snapraid_cron_jobs }}"
+  become: true

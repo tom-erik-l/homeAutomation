@@ -27,6 +27,8 @@ disk d{{ loop.index }} {{ disk.path }}
 {{ snapraid_config_hidden_files }}
 {% endif %}
 
+# Defines files and directories to exclude
+# Remember that all the paths are relative at the mount points
 {% for item in snapraid_config_excludes %}
 exclude {{ item }}
 {% endfor %}
