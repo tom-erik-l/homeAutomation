@@ -304,6 +304,21 @@
             ],
             "group": "build",
             "problemMatcher": []
+        },
+
+        {   "label": "Deploy snapraid role",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\bash.exe",
+                    "args": [ "-c" ]
+                }
+            },
+            "command": [
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+            ],
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }
