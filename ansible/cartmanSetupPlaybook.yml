@@ -40,6 +40,7 @@
         - git
         - nethogs
         - tree
+        - htop
       state: present
     become: true
 
