@@ -1,4 +1,28 @@
-- name: homeAssistant container
+- name: "Home Assistant: Custom container - Circadian_lighting - Create dir"
+  file:
+    dest: "{{ appData }}/homeAssistant/custom_components/circadian_lighting/"
+    state: directory
+    owner: "{{dockeruser}}"
+    group: "{{dockergroup}}"
+  become: true
+
+- name: "Home Assistant: Custom container - Circadian_lighting - Fetch files"
+  get_url:
+    url: "https://raw.githubusercontent.com/claytonjn/hass-circadian_lighting/master/custom_components/circadian_lighting/{{ circadianFiles }}"
+    dest: "{{ appData }}/homeAssistant/custom_components/circadian_lighting/"
+    mode: 0644
+    owner: dockeruser
+  with_items:
+    - "__init__.py"
+    - "sensor.py"
+    - "switch.py"
+    - "manifest.json"
+    - "services.yaml"
+  loop_control:
+    loop_var: circadianFiles
+  become: true
+
+- name: Home Assistant container
   docker_container:
     name: homeAssistant
     image: homeassistant/home-assistant:stable
@@ -13,9 +37,11 @@
     restart_policy: unless-stopped
   become: true
 
-- name: allow homeAssistant in UFW firewall
+- name: allow Home Assistant in UFW firewall
   ufw:
     rule: allow
     proto: tcp
     port: "8123"
   become: true
+
+
