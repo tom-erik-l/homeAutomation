@@ -1,7 +1,7 @@
 - name: radarr container
   docker_container:
     name: radarr
-    image: linuxserver/radarr:preview
+    image: linuxserver/radarr:nightly
     env:
       PUID: "{{ PUID }}"
       PGID: "{{ PGID }}"
