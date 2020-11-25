@@ -1,3 +1,12 @@
+- name: Set fs.inotify. for Plex EAE TimeOut
+# https://forums.plex.tv/t/eae-timeout-eae-not-running-or-wrong-folder/609043/12
+  lineinfile:
+    path: /etc/sysctl.conf
+    state: present
+    regexp: '^fs.inotify.max_user_watches'
+    line: 'fs.inotify.max_user_watches = 524288'
+  become: true
+
 - name: plex container
   docker_container:
     name: plex
@@ -30,3 +39,5 @@
     proto: tcp
     port: "32400"
   become: true
+
+
