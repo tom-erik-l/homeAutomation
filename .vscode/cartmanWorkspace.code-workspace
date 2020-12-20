@@ -4,5 +4,7 @@
 			"path": "C:\\Users\\Tom-Erik\\Google Drive\\repos\\homeAutomation\\serverSetup"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe"
+	},
 }
