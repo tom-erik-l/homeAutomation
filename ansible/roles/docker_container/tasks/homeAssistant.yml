@@ -12,6 +12,7 @@
     dest: "{{ appData }}/homeAssistant/custom_components/circadian_lighting/"
     mode: 0644
     owner: dockeruser
+    force: yes
   with_items:
     - "__init__.py"
     - "sensor.py"
