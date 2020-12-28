@@ -23,6 +23,13 @@
     loop_var: circadianFiles
   become: true
 
+- name: pull Home Assistant repo
+  git:
+    dest: "{{ appData }}/homeAssistant"
+    repo: https://github.com/tom-erik-l/homeAssistant.git
+  become: true
+
+
 - name: Home Assistant container
   docker_container:
     name: homeAssistant
