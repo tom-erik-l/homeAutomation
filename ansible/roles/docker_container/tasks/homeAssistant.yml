@@ -23,6 +23,14 @@
     loop_var: circadianFiles
   become: true
 
+- name: Install packages required by Home Assistant
+  apt:
+    pkg:
+      - bluetooth # Req. by bluetooth-tracker
+      - libbluetooth-dev # Req. by bluetooth-tracker
+    state: present
+  become: true
+
 - name: Home Assistant container
   docker_container:
     name: homeAssistant
