@@ -23,13 +23,6 @@
     loop_var: circadianFiles
   become: true
 
-- name: pull Home Assistant repo
-  git:
-    dest: "{{ appData }}/homeAssistant"
-    repo: https://github.com/tom-erik-l/homeAssistant.git
-  become: true
-
-
 - name: Home Assistant container
   docker_container:
     name: homeAssistant
@@ -62,3 +55,23 @@
     hour: "03"
     dom: "*"
   become: true
+
+- name: Copy private key for remote user (ASUSWRT Integration)
+  copy:
+    src: "{{ sshFiles }}"
+    dest: "{{ appData }}/homeAssistant/secrets/ssh/"
+    mode: 0600
+  with_items:
+    - "/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome"
+    # - "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome') }}"
+  loop_control:
+    loop_var: sshFiles
+  become: true
+
+- name: pull Home Assistant repo
+  git:
+    dest: "{{ appData }}/homeAssistant"
+    repo: https://github.com/tom-erik-l/homeAssistant.git
+  become: true
+
+
