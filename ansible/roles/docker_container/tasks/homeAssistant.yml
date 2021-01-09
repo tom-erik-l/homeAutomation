@@ -53,16 +53,16 @@
     port: "8123"
   become: true
 
-- name: setup cron job snapraid-runner
-  cron:
-    user: "root"
-    job: "docker container restart homeAssistant"
-    name: "homeAssistant_restart"
-    weekday: "*"
-    minute: "00"
-    hour: "03"
-    dom: "*"
-  become: true
+# - name: setup cron job snapraid-runner
+#   cron:
+#     user: "root"
+#     job: "docker container restart homeAssistant"
+#     name: "homeAssistant_restart"
+#     weekday: "*"
+#     minute: "00"
+#     hour: "03"
+#     dom: "*"
+#   become: true
 
 - name: Copy private key for remote user (ASUSWRT Integration)
   copy:
