@@ -38,9 +38,10 @@
         - curl
         - python
         - git
-        - nethogs
+        - nethogs     # View network transfer rates
         - tree
         - htop
+        - bridge-utils # To configure network bridge
       state: present
     become: true
 
@@ -49,9 +50,54 @@
   - debug:
       var: ansible_facts.services
 
+# Back up of :
+#  /etc/netplan/01-netcfg.yaml
+#
+# # This file describes the network interfaces available on your system
+# # For more information, see netplan(5).
+# network:
+#   version: 2
+#   renderer: networkd
+#   ethernets:
+#     eno1:
+#       dhcp4: yes
+#       nameservers:
+#         addresses: [1.1.1.1,1.0.0.1]
+
+  - name: configure 4 port NIC as bridge to internal NIC
+    blockinfile:
+      path: /etc/netplan/01-netcfg.yaml # Name of the default netplan config file for Ubuntu server
+      backup: yes
+      marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+      insertafter: "eno1:"
+      block: |2
+              dhcp4: no
+            enp3s0f0:
+              dhcp4: no
+            enp3s0f1:
+              dhcp4: no
+            enp4s0f0:
+              dhcp4: no
+            enp4s0f1:
+              dhcp4: no
+          bridges:
+            br0:
+              interfaces: [eno1, enp3s0f0, enp3s0f1, enp4s0f0, enp4s0f1]
+      # validate: 'sudo netplan try -config-file %s'
+    tags:
+      - netplan
+    become: true
+
+  # - name: Apply netplan
+  #   command: netplan try
+  #   async: 45
+  #   poll: 0
+  #   become: true
+
   roles:
   - {role: mergerfs, tags: mergerfs}
   - {role: samba, tags: samba}
+  - {role: ansible-netplan, tags: netplan}
   - {role: docker, tags: docker}
   - {role: docker_container, tags: docker_container}
   - {role: ansible-rclone, tags: rclone}
