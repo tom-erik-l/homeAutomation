@@ -11,10 +11,10 @@
     - tautulli
     - sonarr
     - radarr
-    - organizr
-    - bazarr
+    # - organizr
+    # - bazarr
     - homeAssistant
-    - lidarr
+    # - lidarr
     #- tdarr
     appData: /opt/appdata
     storageData: /mnt/storage
@@ -42,6 +42,7 @@
         - tree
         - htop
         - bridge-utils # To configure network bridge
+        - unrar
       state: present
     become: true
 
@@ -88,16 +89,10 @@
       - netplan
     become: true
 
-  # - name: Apply netplan
-  #   command: netplan try
-  #   async: 45
-  #   poll: 0
-  #   become: true
 
   roles:
   - {role: mergerfs, tags: mergerfs}
   - {role: samba, tags: samba}
-  - {role: ansible-netplan, tags: netplan}
   - {role: docker, tags: docker}
   - {role: docker_container, tags: docker_container}
   - {role: ansible-rclone, tags: rclone}
