@@ -6,6 +6,9 @@ mntpoints:
   - { name: disk3, type: ext4, UUID: abc024ce-88fa-4c23-899b-b265416b23cc} #WD Elements 12TB
   - { name: disk4, type: ext4, UUID: 0780b95c-0808-4b5e-908a-716ff4dd3a23} #WD Elements 12TB Amazon.cd 03/06/2020
 
+## VERY IMPORTANT: Delete the old mount points when de-commissioning a drive, if it is no longer being used.
+## ELSE: the root file system will be used by mergerFS and will be a major pain, this is needed as the fstab entry for mergerFS is configured with a wildcard!
+
 # Swapping drives:
 # Start PC med alle gamle diske
 # Tjek smart data for at finde ud af hvilken af de gamle som er dårlige

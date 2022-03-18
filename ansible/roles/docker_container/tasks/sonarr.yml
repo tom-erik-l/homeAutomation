@@ -1,7 +1,7 @@
 - name: sonarr container
   docker_container:
     name: sonarr
-    image: linuxserver/sonarr:preview
+    image: linuxserver/sonarr
     env:
       PUID: "{{ PUID }}"
       PGID: "{{ PGID }}"
