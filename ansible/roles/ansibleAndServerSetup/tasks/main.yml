@@ -11,9 +11,20 @@
   #     msg: item group is = {{item.group}}
   #   with_items: "{{groupPermissions}}"  
 
+  - name: Create local sudoers file
+    file:
+      path: /etc/sudoers.d/sudoerslocal
+      state: touch
+      mode: '0755'
+      owner: root
+      group: root
+      modification_time: preserve
+      access_time: preserve
+    become: true
+
   - name: Set group permissions
     lineinfile:
-      path: /etc/sudoers
+      path: /etc/sudoers.d/sudoerslocal
       state: present
       regexp: '^%{{item.group}}'
       line: "{{item.permission}}"

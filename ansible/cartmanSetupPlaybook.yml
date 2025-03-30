@@ -16,6 +16,7 @@
     - homeAssistant
     # - lidarr
     #- tdarr
+    - zigbee2mqtt
     appData: /opt/appdata
     storageData: /mnt/storage
     PUID: "1050" # User and group for docker

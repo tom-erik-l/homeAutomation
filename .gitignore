@@ -355,3 +355,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+ansible/roles/docker_container/templates/zigbee2mqtt_configuration.yaml.j2

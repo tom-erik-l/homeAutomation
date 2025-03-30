@@ -6,22 +6,22 @@
     group: "{{dockergroup}}"
   become: true
 
-- name: "Home Assistant: Custom container - Circadian_lighting - Fetch files"
-  get_url:
-    url: "https://raw.githubusercontent.com/claytonjn/hass-circadian_lighting/master/custom_components/circadian_lighting/{{ circadianFiles }}"
-    dest: "{{ appData }}/homeAssistant/custom_components/circadian_lighting/"
-    mode: 0644
-    owner: dockeruser
-    force: yes
-  with_items:
-    - "__init__.py"
-    - "sensor.py"
-    - "switch.py"
-    - "manifest.json"
-    - "services.yaml"
-  loop_control:
-    loop_var: circadianFiles
-  become: true
+# - name: "Home Assistant: Custom container - Circadian_lighting - Fetch files"
+#   get_url:
+#     url: "https://raw.githubusercontent.com/claytonjn/hass-circadian_lighting/master/custom_components/circadian_lighting/{{ circadianFiles }}"
+#     dest: "{{ appData }}/homeAssistant/custom_components/circadian_lighting/"
+#     mode: 0644
+#     owner: dockeruser
+#     force: yes
+#   with_items:
+#     - "__init__.py"
+#     - "sensor.py"
+#     - "switch.py"
+#     - "manifest.json"
+#     - "services.yaml"
+#   loop_control:
+#     loop_var: circadianFiles
+#   become: true
 
 - name: Install packages required by Home Assistant
   apt:
@@ -70,8 +70,8 @@
     dest: "{{ appData }}/homeAssistant/secrets/ssh/"
     mode: 0600
   with_items:
-    - "/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome"
-    # - "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome') }}"
+    - "/mnt/c/Users/tomer/.ssh/id_rsa_ansibleAdminHome"
+    # - "{{ lookup('file','/mnt/c/Users/tomer/.ssh/id_rsa_ansibleAdminHome') }}"
   loop_control:
     loop_var: sshFiles
   become: true
@@ -79,7 +79,7 @@
 - name: pull Home Assistant repo
   git:
     dest: "{{ appData }}/homeAssistant"
-    repo: https://github.com/tom-erik-l/homeAssistant.git
+    repo: https://github.com/tomer-l/homeAssistant.git
   become: true
 
 

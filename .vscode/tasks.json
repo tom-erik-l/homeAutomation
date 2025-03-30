@@ -7,12 +7,12 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --vault-password-file /mnt/c/Users/tomer/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []
@@ -22,12 +22,12 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='docker_container' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='docker_container' --vault-password-file /mnt/c/Users/tomer/.vault/vault_pass.txt"
             ],
             "group": {
                 "kind": "build",
@@ -40,12 +40,12 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='transmission' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='transmission' --vault-password-file /mnt/c/Users/tomer/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []
@@ -55,8 +55,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -70,8 +70,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -85,12 +85,12 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pihole' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='pihole' --vault-password-file /mnt/c/Users/tomer/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []
@@ -100,8 +100,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -115,8 +115,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -130,8 +130,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -145,8 +145,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -160,8 +160,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -175,8 +175,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -190,8 +190,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -205,8 +205,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -220,8 +220,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -235,8 +235,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -250,8 +250,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -265,8 +265,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -280,8 +280,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -295,8 +295,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -310,8 +310,8 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
@@ -325,12 +325,12 @@
             "type": "shell",
             "options": {
                 "shell": {
-                    "executable": "C:\\Windows\\System32\\bash.exe",
-                    "args": [ "-c" ]
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                     "args": [ "-e bash -lic" ]
                 }
             },
             "command": [
-                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid' --vault-password-file /mnt/c/Users/Tom-Erik/.vault/vault_pass.txt"
+                "ansible-playbook 'ansible/cartmanSetupPlaybook.yml' -i 'ansible/hosts.yml' --tags='snapraid' --vault-password-file /mnt/c/Users/tomer/.vault/vault_pass.txt"
             ],
             "group": "build",
             "problemMatcher": []

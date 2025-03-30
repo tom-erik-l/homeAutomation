@@ -1,5 +1,5 @@
 createUser:
-- {name: tom-erikAnsibleAdmin, group: wheel, copy_local_key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome.pub') }}", copy_local_private_key: "{{ lookup('file','/mnt/c/Users/Tom-Erik/.ssh/id_rsa_ansibleAdminHome') }}"}
+- {name: tom-erikAnsibleAdmin, group: wheel, copy_local_key: "{{ lookup('file','/mnt/c/Users/tomer/.ssh/id_rsa_ansibleAdminHome.pub') }}", copy_local_private_key: "{{ lookup('file','/mnt/c/Users/tomer/.ssh/id_rsa_ansibleAdminHome') }}"}
 
 groupPermissions:
 #Could maybe try to remove duplicate of groupname in group and permission keys

@@ -2,4 +2,4 @@ CURL_OPTS: "--connect-timeout 15 --silent --show-error --fail"
 TARGET: localhost
 
 # SSL Stuff
-sslPath: "/home/tom-erik/.ssl"
+sslPath: "/home/tomer/.ssl"

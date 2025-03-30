@@ -1,0 +1,78 @@
+
+# - name: Install Mosquitto MQTT broker
+#   apt:
+#     pkg:
+#       - mosquitto
+#       - mosquitto-clients
+#     state: present
+#   become: true
+
+# - name: Start Mosquitto MQTT broker on system boot
+#   command: systemctl enable mosquitto.service
+#   become: true
+
+- name: Install Mosquitto config
+  template:
+    src: mosquitto_configuration.conf.j2
+    dest: "{{ appData }}/mosquitto/config/mosquitto.conf"
+    owner: root
+    group: root
+    mode: 0775
+  become: true
+
+- name: Mosquitto MQTT broker container
+  docker_container:
+    name: mosquitto
+    image: eclipse-mosquitto:2.0
+    env:
+      TZ: "{{ timeZone}} "
+    volumes:
+      - "{{ appData }}/mosquitto/config:/mosquitto/config"
+      - "{{ appData }}/mosquitto/data:/mosquitto/data"
+      - "{{ appData }}/mosquitto/log:/mosquitto/log"
+    # published_ports:
+      # - "1883:1883"
+      # - "9001:9001"
+    network_mode: host
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+    command: 'mosquitto -c /mosquitto/config/mosquitto.conf'
+  become: true
+
+- name: Install Zigbee2MQtt config
+  template:
+    src: zigbee2mqtt_configuration.yaml.j2
+    dest: "{{ appData }}/zigbee2mqtt/configuration.yaml"
+    owner: root
+    group: root
+    mode: 0775
+  become: true
+
+- name: Zigbee2MQTT container
+  docker_container:
+    name: Zigbee2MQTT
+    image: koenkk/zigbee2mqtt:latest
+    env:
+      TZ: "{{ timeZone}} "
+    devices:
+      "/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_d21a9f291593eb11b8321b4f3d98b6d1-if00-port0:/dev/ttyUSB0"
+    volumes:
+      - "{{ appData }}/zigbee2mqtt:/app/data"
+      - "/run/udev:/run/udev:ro"
+    network_mode: host
+    # published_ports:
+      # - "8081:8081"
+    pull: yes
+    restart: "{{ restart_containers }}"
+    state: started
+    restart_policy: unless-stopped
+  become: true
+
+- name: allow zigbee2mqtt frontend in UFW firewall
+  ufw:
+    rule: allow
+    proto: tcp
+    port: "8081"
+  become: true
